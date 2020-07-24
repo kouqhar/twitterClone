@@ -1,0 +1,599 @@
+*,html{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root{
+    --bg-color : #15202b;
+    --primary-white : #fff;
+    --primary-green : #17bf63;
+    --sub-text-color : #A5AEB6;
+    --shade-gray : #253341;
+    --hover-color :#182F31;
+}
+
+@mixin padding-margin($padding : 0, $margin : 0) {
+    padding: $padding;
+    margin: $margin;
+}
+
+@mixin height-width($height : 100%, $width : 100%) {
+    height: $height;
+    width: $width;
+}
+
+@mixin display-grid($columns, $rows) {
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+}
+
+@mixin display-flex($justify : center, $align : center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin green-btn {
+    background: var(--primary-green);
+    border: none;
+    border-radius: 50px;
+    color: var(--primary-white);
+    font-weight: 700;
+    text-align: center;
+    font-size: .6em;
+}
+
+@mixin border-style {
+    border-left: 2px solid var(--shade-gray);
+    border-right: 2px solid var(--shade-gray);
+}
+
+img{
+    @include height-width(100px, 100px);
+    border-radius: 50%;
+}
+
+button{
+    cursor: pointer;
+    &:focus{
+        outline: none;
+    }
+}
+
+body{
+    background: var(--bg-color);
+    color: var(--primary-white);
+    font-size: 1.5em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+}
+
+li,a{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.full-body-container{
+    @include display-grid(2fr 7fr, 1fr);
+    @include height-width(100%, 100%);
+    @include padding-margin(0 , 0 auto);
+    .svg-follow{
+        @include height-width(1em, 1em);
+        fill: var(--primary-white);
+    }
+    .navigation{
+        @include display-flex(center,flex-start);
+        @include height-width();
+        .container{
+            width: 80%;
+            margin: 0 auto;
+            z-index: 999;
+            nav{
+                padding: 1% 3%;
+                width: 100%;
+                .header-logo{
+                    @include height-width(1.5em, 1.5em);
+                    margin: 5%;
+                    .svg-msg{
+                        @include height-width();
+                        fill: var(--primary-white);
+                    }
+                }
+                ul{
+                    @include display-flex();
+                    flex-direction: column;
+                    width: 100%;
+                    li{
+                        width: 100%;
+                        line-height: 2.2em;
+                        i{
+                            margin-right: 5%;
+                            .svg-msg{
+                                @include height-width(1em, 1em);
+                                display: inline-block;
+                                fill: var(--primary-white);
+                            }
+                            img{
+                                @include height-width();
+                                display: inline-block;
+                            }
+                        }
+                        a{
+                            padding: 4% 5%;
+                            text-align: left;
+                            color: var(--primary-white);
+                            font-weight: 700;
+                            font-size: 1em;
+                        }
+                        &:hover{
+                            background: var(--hover-color);
+                            color: var(--primary-green);
+                            fill: var(--primary-green);
+                            border-radius: 1em;
+                            a , .svg-msg{
+                                color: var(--primary-green);
+                                fill: var(--primary-green);
+                            }
+                        }
+                    }
+                }
+                .tweet-btn{
+                    @include green-btn();
+                    @include padding-margin(8% 15%, 10% 0 0);
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .home-tweet{
+        @include display-grid(5fr 3.5fr, 1fr);
+        @include height-width();
+        background: var(--bg-color);
+        height: 100vh;
+        scroll-behavior: smooth;
+        .container{
+            @include display-grid(1fr, auto);
+            @include border-style();
+            position: relative;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .top-content{
+                @include display-flex(space-between, center);
+                flex-direction: row;
+                position: sticky;
+                top: 0;
+                left: 0;
+                width: 100%;
+                margin: 0;
+                padding: 2% 3%;
+                border-bottom: 2px solid var(--shade-gray);
+                background: var(--bg-color);
+                z-index: 10;
+                .text p{
+                    font-weight: 700;
+                    font-size: .8em;
+                }
+                .star-img{
+                    @include height-width(1em, 1em);
+                    .svg-msg{
+                        @include height-width();
+                        fill: var(--primary-green);
+                    }
+                }
+            }
+            .post-tweet{
+                @include display-flex();
+                flex-direction: column;
+                @include padding-margin(0, 2%);
+                .image-text{
+                    width: 100%;
+                    img{
+                        width: 10%;
+                        height: inherit;
+                        display: inline-block;
+                    }
+                    textarea{
+                        @include padding-margin(3% 3% 0, 0);
+                        width: 85%;
+                        font: .85em system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+                        background: transparent;
+                        border: none;
+                        color: var(--primary-white);
+                        resize: none;
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                }
+                .tweet{
+                    width: 100%;
+                    .add-content{
+                        @include height-width(100%, 85%);
+                        @include display-flex(space-between, center);
+                        float: right;
+                        .files{
+                            @include display-flex(space-between);
+                            width: 40%;
+                            .svg-msg{
+                                cursor: pointer;
+                                @include height-width(.95em, .95em);
+                                fill: var(--primary-green);
+                            }
+                        }
+                        .tweet-btn{
+                            @include green-btn();
+                            width: 20%;
+                            padding: 3% 5%;
+                            color: red;
+                        }
+                    }
+                }
+            }
+            .divide{
+                width: 100%;
+                height: 2vh;
+                background: var(--shade-gray);
+            }
+            .tweety{
+                @include height-width(auto, 100%);
+                width: 100%;
+                .display-tweet{
+                    @include height-width(21.3em, 100%);
+                    border-bottom: 3px solid var(--shade-gray);
+                    transition: background .4s ease;
+                    .user-content{
+                        margin: 0 1%;
+                        padding: 2% 1%;
+                    }
+                    &:hover{
+                        background: var(--shade-gray);
+                        cursor: pointer;
+                    }
+                    .user-content{
+                        @include display-flex(flex-start, flex-start);
+                        .user-img{
+                            width: 30%;
+                            margin-right: 2%;
+                            img{
+                                width: 100%;
+                                height: inherit;
+                            }
+                        }
+                        .user-tweet{
+                            @include display-flex(flex-start, flex-start);
+                            flex-direction: column;
+                            .content{
+                                @include display-flex(flex-start, flex-start);
+                                flex-direction: column;
+                                width: 100%;
+                                .user-details{
+                                    @include height-width(auto);
+                                    @include display-flex(space-between, flex-start);
+                                    .handle{
+                                        width: auto;
+                                        p.text{
+                                            font-size: .8em;
+                                            font-weight: 700;
+                                            span{
+                                                color: var(--sub-text-color);
+                                                font-weight: 400;
+                                                font-size: .8em;
+                                                padding-left: .8em;
+                                                .dot{
+                                                    padding: 0 .5em;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .settings{
+                                        width: auto;
+                                        .svg-msg{
+                                            @include height-width(1em, 1em);
+                                            fill: var(--sub-text-color);
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                                .tweeted{
+                                    width: 100%;
+                                    p.text{
+                                        font-size: .7em;
+                                        line-height: 1.3em;
+                                    }
+                                    .tweet-link{
+                                        @include display-flex(center, center);
+                                        flex-direction: column;
+                                        border: 1px solid var(--sub-text-color);
+                                        margin: 2% 0 3%;
+                                        border-radius: 1.2em;
+                                        height: auto;
+                                        .image{
+                                            @include height-width(8em, 100%);
+                                            border-bottom: 2px solid var(--shade-gray);
+                                            background-size: cover;
+                                            background-repeat: no-repeat;
+                                            img{
+                                                @include height-width(100%, 100%);
+                                                border-radius: 1.2em 1.2em 0 0;
+                                            }
+                                        }
+                                        .link-text{
+                                            height: 50%;
+                                            padding: 2% 3%;
+                                            h1{
+                                                font-size: .7em;
+                                            }
+                                            p{
+                                                color: var(--sub-text-color);
+                                                font-size: .7em;
+                                                line-height: 1.3em;
+                                                margin: 1% 0;
+                                            }
+                                            a{
+                                                color: var(--sub-text-color);
+                                                font-size: .7em;
+                                                margin: 0 0 5%;
+                                                .svg-msg{
+                                                    @include height-width(1.2em, 1.2em);
+                                                    fill: var(--sub-text-color);
+                                                    cursor: pointer;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .user-retweet{
+                                width: 80%;
+                                float: left;
+                                ul{
+                                    @include display-flex(space-between, flex-end);
+                                    li{
+                                        @include height-width(.8em, .8em);
+                                        .svg-msg{
+                                            @include height-width();
+                                            fill: var(--sub-text-color);
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .mobile-tweet{
+                @include height-width(2.5em, 2.5em);
+                position: fixed;
+                bottom: 2em;
+                border-radius: 50%;
+                right: 35%;
+                background: var(--primary-green);
+                visibility: hidden;
+                .svg-msg{
+                    @include height-width(60%, 60%);
+                    position: absolute;
+                    top: 20%;
+                    left: 25%;
+                    fill: var(--primary-white);
+                    padding: 7%;
+                }
+            }
+        }
+        .search-trend{
+            @include height-width(100vh, 100%);
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            // &::-webkit-scrollbar {
+            //     // width: 12px;
+            //     display: none;
+            // }
+            .content{
+                @include display-flex(flex-start, flex-start);
+                flex-direction: column;
+                width: 90%;
+                margin: 0 auto;
+                position: relative;
+                aside{
+                    position: relative;
+                    @include height-width();
+                    .search-bar{
+                        position: sticky;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        margin: 0;
+                        padding: 3% 0;
+                        background: var(--bg-color);
+                        z-index: 10;
+                        display: inline-flex;
+                        overflow: hidden;
+                        input[type="text"]{
+                            position: absolute;
+                            border: none;
+                            background: var(--shade-gray);
+                            border-radius: 3.13em;
+                            font-size: .6em;
+                            padding: 3% 15%;
+                            width: 100%;
+                            color: var(--primary-white);
+                            &:focus{
+                                outline: none;
+                            }
+                            &::placeholder{
+                                color: var(--sub-text-color);
+                            }
+                        }
+                        .svg-search {
+                            @include height-width(1.6em, 1.6em);
+                            padding: 2% 1%;
+                            fill: var(--sub-text-color);
+                            border: none;
+                            background: transparent;
+                            border-radius: 3.13em 0 0 3.13em;
+                            z-index: 20;
+                        }
+                    }
+                    .bg-same{
+                        background: var(--shade-gray);
+                        border-radius: .94em;
+                        margin: 5% 0;
+                    }
+                    .trends-section, .follow-section{
+                        cursor: pointer;
+                        .heading{
+                            @include display-flex(space-between, center);
+                            border-bottom: 2px solid var(--bg-color);
+                            width: 100%;
+                            padding: 5%;
+                            .text p{
+                                font-weight: 700;
+                                font-size: .9em;
+                            }
+                            .settings{
+                                @include height-width(1em, 1em);
+                                .svg-msg{
+                                    @include height-width();
+                                    fill: var(--primary-green);
+                                }
+                            }
+                        }
+                        .items{
+                            border-bottom: 2px solid var(--bg-color);
+                        }
+                        .show-more{
+                            @include display-flex(space-between, center);
+                            width: 100%;
+                            padding: 5%;
+                            p{
+                                font-weight: 400;
+                                font-size: .8em;
+                                color: var(--primary-green);
+                            }
+                        }
+                    }
+                    .trends-section{
+                        width: 100%;
+                        img{
+                            width: 50px;
+                            height: 50px;
+                        }
+                        .trending{
+                            width: 100%;
+                            .items{
+                                @include display-flex(space-between, flex-start);
+                                padding: 2% 5%;
+                                .trend{
+                                    width: 100%;
+                                    p{
+                                        line-height: 1.5em;
+                                        font-weight: 700;
+                                        font-size: .8em;
+                                    }
+                                    span{
+                                        color: var(--sub-text-color);
+                                        font-weight: 400;
+                                        font-size: .7em;
+                                    }
+                                }
+                                .arrow-trend{
+                                    @include height-width(1em, 1em);
+                                    .svg-msg{
+                                        @include height-width();
+                                        fill: var(--sub-text-color);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .follow-section{
+                        width: 100%;
+                        .follow-lists{
+                            width: 100%;
+                            .items{
+                                @include display-flex(space-between, center);
+                                padding: 3% 5%;
+                                .image{
+                                    @include height-width(2em, 3em);
+                                    img{
+                                        @include height-width(100%, 90%);
+                                    }
+                                }
+                                .user-name{
+                                    @include height-width(100%, 80%);
+                                    margin-left: .3em;
+                                    p{
+                                        font-weight: 700;
+                                        font-size: .8em;
+                                    }
+                                    span{
+                                        font-weight: 400;
+                                        font-size: .7em;
+                                        color: var(--sub-text-color);
+                                    }
+                                }
+                                .btn{
+                                    @include height-width(auto, auto);
+                                    border: 2px solid var(--primary-green);
+                                    padding: 2% 5%;
+                                    border-radius: 1.3em;
+                                    text-align: center;
+                                    a{
+                                        color: var(--primary-green);
+                                        font-size: .7em;
+                                        font-weight: 700;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .footer-section{
+                        width: 100%;
+                        margin: 0;
+                        padding: 4% 0;
+                        z-index: 20;
+                        footer{
+                            @include display-flex(center, flex-start);
+                            flex-direction: column;
+                            width: 90%;
+                            margin: 0 auto;
+                            font-size: .6em;
+                            color: var(--sub-text-color);
+                            .links ul{
+                                @include display-flex(space-around, flex-start);
+                                flex-direction: row;
+                                width: 100%;
+                                li{
+                                    list-style-type: none;
+                                    margin-right: .7em;
+                                    a{
+                                        color: var(--sub-text-color);
+                                    }
+                                    .svg-msg{
+                                        @include height-width(1em, .9em);
+                                        transform: translate(-20%, 20%);
+                                        fill: var(--sub-text-color);
+                                    }
+                                }
+                            }
+                            .copyright{
+                                width: 100%;
+                                margin: 3% auto;
+                                p{
+                                    color: var(--sub-text-color);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
